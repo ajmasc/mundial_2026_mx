@@ -166,25 +166,25 @@
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4">
                 <div>
                     <h2 class="text-3xl font-bold text-gray-900 mb-2">Calendario en TV Abierta</h2>
-                    <p class="text-gray-600">Partidos confirmados o altamente probables para transmisión gratuita (Canal 5, Azteca 7).</p>
+                    <p class="text-gray-600">Partidos confirmados para transmisión gratuita en la Fase de Grupos.</p>
                 </div>
                 <div class="relative w-full md:w-72">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <span class="text-gray-400">🔍</span>
                     </div>
-                    <input type="text" id="searchInput" placeholder="Buscar por equipo, fecha o fase..." class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-[#006341] focus:border-[#006341] sm:text-sm transition duration-150 ease-in-out">
+                    <input type="text" id="searchInput" placeholder="Buscar por equipo, fecha o canal..." class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-[#006341] focus:border-[#006341] sm:text-sm transition duration-150 ease-in-out">
                 </div>
             </div>
 
-            <div class="glass-card rounded-xl overflow-hidden">
-                <div class="table-container overflow-x-auto">
+            <div class="glass-card rounded-xl overflow-hidden max-h-[500px] flex flex-col">
+                <div class="table-container overflow-x-auto overflow-y-auto flex-grow">
                     <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
+                        <thead class="bg-gray-50 sticky top-0 z-10">
                             <tr>
-                                <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Fecha (2026)</th>
-                                <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Partido / Fase</th>
-                                <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Canal de Transmisión (Abierta)</th>
-                                <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Horario (GMT-6, CDMX)</th>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Fecha</th>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Partido</th>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Canal de Transmisión</th>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Horario (GMT-6)</th>
                             </tr>
                         </thead>
                         <tbody id="scheduleTableBody" class="bg-white divide-y divide-gray-200">
@@ -196,7 +196,7 @@
                 </div>
             </div>
             <p class="text-xs text-gray-400 mt-3 text-right">
-                *Nota: Horarios sujetos a ajustes oficiales de la FIFA.
+                *Nota: Los restantes 15 partidos abiertos del torneo correspondientes a eliminación directa se calendarizarán dinámicamente. Horarios sujetos a ajustes oficiales.
             </p>
         </section>
 
@@ -212,7 +212,7 @@
         const chartData = {
             labels: ['TV Abierta (Canal 5, Azteca 7)', 'Exclusivos Pago/Streaming (Sky, ViX)'],
             datasets: [{
-                data: [40, 64], 
+                data: [32, 72], 
                 backgroundColor: [
                     '#006341', 
                     '#E5E7EB'  
@@ -257,24 +257,25 @@
             }
         };
 
+        // Datos actualizados y corregidos de la Fase de Grupos
         const scheduleData = [
-            { fecha: "11 de Junio", partido: "México vs. Sudáfrica (Inauguración)", canal: "Canal 5, Las Estrellas, Azteca 7", horario: "13:00 hrs" },
-            { fecha: "12 de Junio", partido: "Estados Unidos vs. Paraguay (Fase de Grupos)", canal: "Canal 5, Azteca 7", horario: "13:00 hrs" },
-            { fecha: "14 de Junio", partido: "Países Bajos vs. Japón (Fase de Grupos)", canal: "Canal 5, Azteca 7", horario: "10:00 hrs" },
-            { fecha: "18 de Junio", partido: "México vs. Corea del Sur (Fase de Grupos)", canal: "Canal 5, Las Estrellas, Azteca 7", horario: "20:00 hrs" },
-            { fecha: "20 de Junio", partido: "Países Bajos vs. Suecia (Fase de Grupos)", canal: "Canal 5, Azteca 7", horario: "16:00 hrs" },
-            { fecha: "24 de Junio", partido: "Chequia vs. México (Fase de Grupos)", canal: "Canal 5, Las Estrellas, Azteca 7", horario: "16:00 hrs" },
-            { fecha: "26 de Junio", partido: "Uruguay vs. España (Fase de Grupos)", canal: "Canal 5, Azteca 7", horario: "13:00 hrs" },
-            { fecha: "28 de Junio", partido: "Dieciseisavos de Final (S1)", canal: "Canal 5, Azteca 7", horario: "10:00 hrs" },
-            { fecha: "30 de Junio", partido: "Dieciseisavos de Final (Posible México si avanza)", canal: "Canal 5, Azteca 7", horario: "20:00 hrs" },
-            { fecha: "04 de Julio", partido: "Octavos de Final (O1)", canal: "Canal 5, Azteca 7", horario: "13:00 hrs" },
-            { fecha: "05 de Julio", partido: "Octavos de Final (Posible México)", canal: "Canal 5, Azteca 7", horario: "16:00 hrs" },
-            { fecha: "09 de Julio", partido: "Cuartos de Final (C1)", canal: "Canal 5, Azteca 7", horario: "13:00 hrs" },
-            { fecha: "10 de Julio", partido: "Cuartos de Final (C3)", canal: "Canal 5, Azteca 7", horario: "16:00 hrs" },
-            { fecha: "14 de Julio", partido: "Semifinal 1", canal: "Canal 5, Azteca 7", horario: "19:00 hrs" },
-            { fecha: "15 de Julio", partido: "Semifinal 2", canal: "Canal 5, Azteca 7", horario: "19:00 hrs" },
-            { fecha: "18 de Julio", partido: "Partido por el Tercer Lugar", canal: "Canal 5, Azteca 7", horario: "16:00 hrs" },
-            { fecha: "19 de Julio", partido: "Gran Final", canal: "Canal 5, Las Estrellas, Azteca 7", horario: "13:00 hrs" }
+            { fecha: "Jueves 11 de junio", partido: "México vs. Sudáfrica (Inaugural)", canal: "Las Estrellas, Canal 5, Canal 9, Azteca 7, Azteca Uno", horario: "13:00 hrs" },
+            { fecha: "Viernes 12 de junio", partido: "Estados Unidos vs. Paraguay", canal: "Canal 5, Azteca 7", horario: "19:00 hrs" },
+            { fecha: "Sábado 13 de junio", partido: "Brasil vs. Marruecos", canal: "Canal 5, Azteca 7", horario: "16:00 hrs" },
+            { fecha: "Domingo 14 de junio", partido: "Países Bajos vs. Japón", canal: "Canal 5, Azteca 7", horario: "14:00 hrs" },
+            { fecha: "Martes 16 de junio", partido: "Argentina vs. Argelia", canal: "Canal 5, Azteca 7", horario: "19:00 hrs" },
+            { fecha: "Miércoles 17 de junio", partido: "Inglaterra vs. Croacia", canal: "Canal 5, Azteca 7", horario: "14:00 hrs" },
+            { fecha: "Jueves 18 de junio", partido: "México vs. Corea del Sur", canal: "Canal 5, Canal 9, Azteca 7", horario: "19:00 hrs" },
+            { fecha: "Viernes 19 de junio", partido: "Brasil vs. Haití", canal: "Canal 5, Azteca 7", horario: "18:30 / 19:00 hrs" },
+            { fecha: "Sábado 20 de junio", partido: "Países Bajos vs. Suecia", canal: "Canal 5, Azteca 7", horario: "11:00 hrs" },
+            { fecha: "Domingo 21 de junio", partido: "España vs. Arabia Saudita", canal: "Canal 5, Azteca 7", horario: "10:00 hrs" },
+            { fecha: "Lunes 22 de junio", partido: "Noruega vs. Senegal", canal: "Canal 5, Azteca 7", horario: "18:00 hrs" },
+            { fecha: "Martes 23 de junio", partido: "Colombia vs. RD Congo", canal: "Canal 5, Azteca 7", horario: "20:00 hrs" },
+            { fecha: "Miércoles 24 de junio", partido: "Chequia vs. México", canal: "Canal 5, Canal 9, Azteca 7", horario: "19:00 hrs" },
+            { fecha: "Jueves 25 de junio", partido: "Ecuador vs. Alemania", canal: "Canal 5, Azteca 7", horario: "14:00 hrs" },
+            { fecha: "Viernes 26 de junio", partido: "Uruguay vs. España", canal: "Canal 5, Azteca 7", horario: "18:00 hrs" },
+            { fecha: "Sábado 27 de junio", partido: "Panamá vs. Inglaterra", canal: "Canal 5, Azteca 7", horario: "15:00 hrs" },
+            { fecha: "Sábado 27 de junio", partido: "Colombia vs. Portugal", canal: "Canal 5, Azteca 7", horario: "17:30 hrs" }
         ];
 
         function renderTable(data) {
@@ -309,12 +310,8 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            // 1. RENDERIZAMOS LA TABLA PRIMERO
-            // Esto asegura que la tabla de partidos se muestre independientemente 
-            // de si la gráfica falla al descargar o inicializar.
             renderTable(scheduleData);
 
-            // 2. CONFIGURAMOS EL BUSCADOR
             const searchInput = document.getElementById('searchInput');
             searchInput.addEventListener('input', (e) => {
                 const searchTerm = e.target.value.toLowerCase();
@@ -326,12 +323,11 @@
                 renderTable(filteredData);
             });
 
-            // 3. INTENTAMOS RENDERIZAR LA GRÁFICA (PROTEGIDA CON TRY-CATCH)
             try {
                 const ctx = document.getElementById('distributionChart').getContext('2d');
                 new Chart(ctx, chartConfig);
             } catch (error) {
-                console.error('Error al cargar Chart.js. Verifica tu conexión a internet o bloqueador de anuncios:', error);
+                console.error('Error al cargar Chart.js:', error);
             }
         });
     </script>
