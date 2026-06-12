@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Transmisión: Copa Mundial de la FIFA 2026 en México</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FAFAFA;
+            color: #333333;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 350px;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(229, 231, 235, 0.5);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+        /* Custom scrollbar for table */
+        .table-container::-webkit-scrollbar {
+            height: 8px;
+        }
+        .table-container::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+            border-radius: 4px;
+        }
+        .table-container::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        .table-container::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+    </style>
+    <!-- Chosen Palette: Warm Neutrals with Subtle Green (#006341 - Mexico/Field) and Burgundy (#8A1538 - Qatar/FIFA accent tradition) -->
+    <!-- Application Structure Plan: The SPA is structured logically for a user seeking immediate broadcast information. 
+         1. 'Respuesta Directa' immediately addresses the specific Disney+ query to avoid user frustration. 
+         2. 'Ecosistema de Transmisión' breaks down the options (Open TV, Pay TV, Streaming) and costs clearly using cards. 
+         3. 'Distribución de Partidos' provides a visual summary (Chart.js) of how matches are split, giving context to the data. 
+         4. 'Calendario Interactivo' provides the specific schedule requested, equipped with a search filter for easy exploration. 
+         This flow moves from immediate answers to broad context, ending with specific, actionable data. -->
+    <!-- Visualization & Content Choices: 
+         - Direct Answer: Text block with highlighting -> Goal: Resolve specific query immediately. 
+         - Broadcast Options: Card Grid -> Goal: Easy comparison of platforms and costs. 
+         - Match Distribution: Doughnut Chart (Chart.js) -> Goal: Visualize the proportion of open vs paid matches. Justification: Easy to grasp proportions at a glance. NO SVG used. 
+         - Schedule: Interactive HTML Table -> Goal: Detailed match data. Interaction: Text search filter. Justification: Best format for structured tabular data. NO Mermaid used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="antialiased selection:bg-green-200 selection:text-green-900">
+
+    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-2xl mr-2">⚽</span>
+                    <span class="font-bold text-xl tracking-tight text-gray-900">Mundial 2026 Mx</span>
+                </div>
+                <div class="flex items-center space-x-4 hidden sm:flex">
+                    <a href="#respuesta" class="text-gray-600 hover:text-green-700 font-medium transition-colors">Disney+</a>
+                    <a href="#plataformas" class="text-gray-600 hover:text-green-700 font-medium transition-colors">Plataformas y Costos</a>
+                    <a href="#calendario" class="text-gray-600 hover:text-green-700 font-medium transition-colors">Calendario (TV Abierta)</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+        
+        <header class="text-center space-y-4 py-8">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight">
+                Guía Oficial de Transmisión: <span class="text-[#006341]">FIFA 2026</span>
+            </h1>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                Toda la información sobre dónde y cuándo ver los partidos de la Copa del Mundo en México. Analiza costos, plataformas y el calendario de televisión abierta.
+            </p>
+        </header>
+
+        <section id="respuesta" class="scroll-mt-24">
+            <div class="glass-card rounded-2xl p-6 md:p-8 border-l-4 border-[#8A1538]">
+                <h2 class="text-2xl font-bold mb-4 flex items-center">
+                    <span class="text-2xl mr-2">❓</span> Sobre Disney+ y la TV Abierta
+                </h2>
+                <div class="prose prose-lg text-gray-700 max-w-none">
+                    <p class="mb-4">
+                        Respondiendo a su pregunta principal: <strong>No, los partidos no son los mismos, y de hecho, Disney+ no transmitirá el Mundial.</strong>
+                    </p>
+                    <p>
+                        En México, la plataforma <strong>Disney+</strong> (que recientemente absorbió el contenido de Star+) <strong>no posee los derechos de transmisión</strong> de la Copa Mundial de la FIFA 2026. Los derechos para el territorio mexicano pertenecen en exclusiva a <strong>TelevisaUnivision</strong> y a <strong>Sky Sports</strong>.
+                    </p>
+                    <p class="mt-4 bg-red-50 p-4 rounded-lg text-red-800 text-sm border border-red-100">
+                        <strong>Conclusión:</strong> No podrá ver ningún partido de la Copa del Mundo 2026 con una suscripción normal (ni premium) de Disney+. Deberá recurrir a la TV Abierta, Sky, o ViX.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="plataformas" class="scroll-mt-24">
+            <div class="mb-6">
+                <h2 class="text-3xl font-bold text-gray-900 mb-2">Ecosistema de Transmisión en México</h2>
+                <p class="text-gray-600">Conoce en qué canales y plataformas se distribuirán los 104 partidos del torneo, junto con los costos estimados de suscripción.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-card rounded-xl p-6 hover:-translate-y-1 transition-transform duration-300">
+                    <div class="text-4xl mb-4">📺</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Televisión Abierta</h3>
+                    <p class="text-gray-600 text-sm mb-4">Transmisión de partidos selectos, incluyendo inauguración, partidos de México, semifinales y la gran final.</p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-center text-sm"><span class="text-green-600 mr-2">✔</span> Canal 5 (Televisa)</li>
+                        <li class="flex items-center text-sm"><span class="text-green-600 mr-2">✔</span> Las Estrellas (Televisa)</li>
+                        <li class="flex items-center text-sm"><span class="text-green-600 mr-2">✔</span> Azteca 7 (TV Azteca)</li>
+                    </ul>
+                    <div class="mt-auto pt-4 border-t border-gray-100">
+                        <span class="text-lg font-bold text-green-700">Gratis</span>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-xl p-6 border-t-4 border-[#006341] hover:-translate-y-1 transition-transform duration-300">
+                    <div class="text-4xl mb-4">📡</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Televisión de Paga</h3>
+                    <p class="text-gray-600 text-sm mb-4">La opción tradicional para ver el 100% de los encuentros del torneo en vivo.</p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-center text-sm"><span class="text-green-600 mr-2">✔</span> Sky Sports (Los 104 partidos)</li>
+                        <li class="flex items-center text-sm"><span class="text-green-600 mr-2">✔</span> TUDN (Partidos selectos)</li>
+                    </ul>
+                    <div class="mt-auto pt-4 border-t border-gray-100">
+                        <span class="text-sm text-gray-500">Costo mensual estimado:</span><br>
+                        <span class="text-lg font-bold text-gray-900">Desde $349 MXN</span>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-xl p-6 bg-gradient-to-br from-white to-gray-50 hover:-translate-y-1 transition-transform duration-300">
+                    <div class="text-4xl mb-4">💻</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Streaming (Apps)</h3>
+                    <p class="text-gray-600 text-sm mb-4">Para dispositivos móviles y Smart TVs. Requiere conexión a internet.</p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-center text-sm"><span class="text-green-600 mr-2">✔</span> ViX Premium (Gran parte del torneo)</li>
+                        <li class="flex items-center text-sm"><span class="text-green-600 mr-2">✔</span> Sky+ (App de Sky, 104 partidos)</li>
+                        <li class="flex items-center text-sm text-gray-400 line-through decoration-red-500"><span class="text-red-500 mr-2">✖</span> Disney+ / Star+</li>
+                    </ul>
+                    <div class="mt-auto pt-4 border-t border-gray-100">
+                        <span class="text-sm text-gray-500">Costo ViX Premium:</span><br>
+                        <span class="text-lg font-bold text-gray-900">Aprox. $119 MXN / mes</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+            <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-4">Distribución de los 104 Partidos</h3>
+                <p class="text-gray-600 mb-4">
+                    Para el Mundial 2026, el torneo se expande a 48 equipos y 104 partidos. Históricamente en México, las televisoras abiertas transmiten aproximadamente entre 35 y 40 partidos en vivo, reservando el resto de manera exclusiva para sistemas de pago y plataformas de streaming premium.
+                </p>
+                <div class="flex items-center space-x-2 text-sm text-gray-500 bg-gray-50 p-3 rounded-lg">
+                    <span class="text-xl">💡</span>
+                    <p>Los partidos de la Selección Mexicana, la inauguración y la gran final están garantizados por ley de telecomunicaciones para su transmisión en TV Abierta.</p>
+                </div>
+            </div>
+            <div class="w-full">
+                <div class="chart-container">
+                    <canvas id="distributionChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="calendario" class="scroll-mt-24">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-2">Calendario en TV Abierta</h2>
+                    <p class="text-gray-600">Partidos confirmados o altamente probables para transmisión gratuita (Canal 5, Azteca 7).</p>
+                </div>
+                <div class="relative w-full md:w-72">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <span class="text-gray-400">🔍</span>
+                    </div>
+                    <input type="text" id="searchInput" placeholder="Buscar por equipo, fecha o fase..." class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-[#006341] focus:border-[#006341] sm:text-sm transition duration-150 ease-in-out">
+                </div>
+            </div>
+
+            <div class="glass-card rounded-xl overflow-hidden">
+                <div class="table-container overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Fecha (2026)</th>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Partido / Fase</th>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Canal de Transmisión (Abierta)</th>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Horario (GMT-6, CDMX)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="scheduleTableBody" class="bg-white divide-y divide-gray-200">
+                        </tbody>
+                    </table>
+                </div>
+                <div id="noResultsMessage" class="hidden text-center py-8 text-gray-500">
+                    No se encontraron partidos que coincidan con la búsqueda.
+                </div>
+            </div>
+            <p class="text-xs text-gray-400 mt-3 text-right">
+                *Nota: Los equipos específicos (A2, B3, etc.) se definirán en el sorteo final en diciembre de 2025. Horarios sujetos a ajustes oficiales de la FIFA.
+            </p>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-900 text-white py-8 mt-12">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-sm text-gray-400">Desarrollado para análisis de transmisión deportiva. Datos proyectados para la Copa Mundial de la FIFA 2026™ basados en derechos de transmisión actuales en México.</p>
+        </div>
+    </footer>
+
+    <script>
+        const chartData = {
+            labels: ['TV Abierta (Canal 5, Azteca 7)', 'Exclusivos Pago/Streaming (Sky, ViX)'],
+            datasets: [{
+                data: [40, 64], 
+                backgroundColor: [
+                    '#006341', 
+                    '#E5E7EB'  
+                ],
+                hoverBackgroundColor: [
+                    '#004d33',
+                    '#D1D5DB'
+                ],
+                borderWidth: 0,
+                hoverOffset: 4
+            }]
+        };
+
+        const chartConfig = {
+            type: 'doughnut',
+            data: chartData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '65%',
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            font: { family: "'Inter', sans-serif", size: 13 }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.label || '';
+                                if (label) { label += ': '; }
+                                if (context.parsed !== null) {
+                                    label += context.parsed + ' Partidos';
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        const scheduleData = [
+            { fecha: "11 de Junio", partido: "Inauguración: México vs A2", canal: "Canal 5, Las Estrellas, Azteca 7", horario: "13:00 hrs" },
+            { fecha: "12 de Junio", partido: "Fase de Grupos: Estados Unidos vs B2", canal: "Canal 5, Azteca 7", horario: "13:00 hrs" },
+            { fecha: "14 de Junio", partido: "Fase de Grupos: Equipo Top Europeo vs E4", canal: "Canal 5, Azteca 7", horario: "10:00 hrs" },
+            { fecha: "18 de Junio", partido: "Fase de Grupos: México vs A3", canal: "Canal 5, Las Estrellas, Azteca 7", horario: "20:00 hrs" },
+            { fecha: "20 de Junio", partido: "Fase de Grupos: Argentina (TBD) vs H3", canal: "Canal 5, Azteca 7", horario: "16:00 hrs" },
+            { fecha: "24 de Junio", partido: "Fase de Grupos: México vs A4", canal: "Canal 5, Las Estrellas, Azteca 7", horario: "16:00 hrs" },
+            { fecha: "26 de Junio", partido: "Fase de Grupos: Brasil (TBD) vs K2", canal: "Canal 5, Azteca 7", horario: "13:00 hrs" },
+            { fecha: "28 de Junio", partido: "Dieciseisavos de Final (S1)", canal: "Canal 5, Azteca 7", horario: "10:00 hrs" },
+            { fecha: "30 de Junio", partido: "Dieciseisavos de Final (Posible México si avanza)", canal: "Canal 5, Azteca 7", horario: "20:00 hrs" },
+            { fecha: "04 de Julio", partido: "Octavos de Final (O1)", canal: "Canal 5, Azteca 7", horario: "13:00 hrs" },
+            { fecha: "05 de Julio", partido: "Octavos de Final (Posible México)", canal: "Canal 5, Azteca 7", horario: "16:00 hrs" },
+            { fecha: "09 de Julio", partido: "Cuartos de Final (C1)", canal: "Canal 5, Azteca 7", horario: "13:00 hrs" },
+            { fecha: "10 de Julio", partido: "Cuartos de Final (C3)", canal: "Canal 5, Azteca 7", horario: "16:00 hrs" },
+            { fecha: "14 de Julio", partido: "Semifinal 1", canal: "Canal 5, Azteca 7", horario: "19:00 hrs" },
+            { fecha: "15 de Julio", partido: "Semifinal 2", canal: "Canal 5, Azteca 7", horario: "19:00 hrs" },
+            { fecha: "18 de Julio", partido: "Partido por el Tercer Lugar", canal: "Canal 5, Azteca 7", horario: "16:00 hrs" },
+            { fecha: "19 de Julio", partido: "Gran Final", canal: "Canal 5, Las Estrellas, Azteca 7", horario: "13:00 hrs" }
+        ];
+
+        function renderTable(data) {
+            const tbody = document.getElementById('scheduleTableBody');
+            const noResults = document.getElementById('noResultsMessage');
+            tbody.innerHTML = '';
+
+            if (data.length === 0) {
+                noResults.classList.remove('hidden');
+                return;
+            } else {
+                noResults.classList.add('hidden');
+            }
+
+            data.forEach((row, index) => {
+                const tr = document.createElement('tr');
+                tr.className = index % 2 === 0 ? 'bg-white' : 'bg-gray-50';
+                tr.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        <div class="flex items-center">
+                            <span class="mr-2 text-gray-400">📅</span> ${row.fecha}
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 font-semibold">${row.partido}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">${row.canal}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-bold bg-gray-100 rounded-r-lg">
+                        <span class="mr-1 text-gray-400">⏱</span> ${row.horario}
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const ctx = document.getElementById('distributionChart').getContext('2d');
+            new Chart(ctx, chartConfig);
+
+            renderTable(scheduleData);
+
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const filteredData = scheduleData.filter(item => 
+                    item.partido.toLowerCase().includes(searchTerm) || 
+                    item.fecha.toLowerCase().includes(searchTerm) ||
+                    item.canal.toLowerCase().includes(searchTerm)
+                );
+                renderTable(filteredData);
+            });
+        });
+    </script>
+</body>
+</html>
