@@ -43,19 +43,6 @@
             background: #94a3b8; 
         }
     </style>
-    <!-- Chosen Palette: Warm Neutrals with Subtle Green (#006341 - Mexico/Field) and Burgundy (#8A1538 - Qatar/FIFA accent tradition) -->
-    <!-- Application Structure Plan: The SPA is structured logically for a user seeking immediate broadcast information. 
-         1. 'Respuesta Directa' immediately addresses the specific Disney+ query to avoid user frustration. 
-         2. 'Ecosistema de Transmisión' breaks down the options (Open TV, Pay TV, Streaming) and costs clearly using cards. 
-         3. 'Distribución de Partidos' provides a visual summary (Chart.js) of how matches are split, giving context to the data. 
-         4. 'Calendario Interactivo' provides the specific schedule requested, equipped with a search filter for easy exploration. 
-         This flow moves from immediate answers to broad context, ending with specific, actionable data. -->
-    <!-- Visualization & Content Choices: 
-         - Direct Answer: Text block with highlighting -> Goal: Resolve specific query immediately. 
-         - Broadcast Options: Card Grid -> Goal: Easy comparison of platforms and costs. 
-         - Match Distribution: Doughnut Chart (Chart.js) -> Goal: Visualize the proportion of open vs paid matches. Justification: Easy to grasp proportions at a glance. NO SVG used. 
-         - Schedule: Interactive HTML Table -> Goal: Detailed match data. Interaction: Text search filter. Justification: Best format for structured tabular data. NO Mermaid used. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 </head>
 <body class="antialiased selection:bg-green-200 selection:text-green-900">
 
@@ -209,7 +196,7 @@
                 </div>
             </div>
             <p class="text-xs text-gray-400 mt-3 text-right">
-                *Nota: Los equipos específicos (A2, B3, etc.) se definirán en el sorteo final en diciembre de 2025. Horarios sujetos a ajustes oficiales de la FIFA.
+                *Nota: Horarios sujetos a ajustes oficiales de la FIFA.
             </p>
         </section>
 
@@ -271,13 +258,13 @@
         };
 
         const scheduleData = [
-            { fecha: "11 de Junio", partido: "Inauguración: México vs A2", canal: "Canal 5, Las Estrellas, Azteca 7", horario: "13:00 hrs" },
-            { fecha: "12 de Junio", partido: "Fase de Grupos: Estados Unidos vs B2", canal: "Canal 5, Azteca 7", horario: "13:00 hrs" },
-            { fecha: "14 de Junio", partido: "Fase de Grupos: Equipo Top Europeo vs E4", canal: "Canal 5, Azteca 7", horario: "10:00 hrs" },
-            { fecha: "18 de Junio", partido: "Fase de Grupos: México vs A3", canal: "Canal 5, Las Estrellas, Azteca 7", horario: "20:00 hrs" },
-            { fecha: "20 de Junio", partido: "Fase de Grupos: Argentina (TBD) vs H3", canal: "Canal 5, Azteca 7", horario: "16:00 hrs" },
-            { fecha: "24 de Junio", partido: "Fase de Grupos: México vs A4", canal: "Canal 5, Las Estrellas, Azteca 7", horario: "16:00 hrs" },
-            { fecha: "26 de Junio", partido: "Fase de Grupos: Brasil (TBD) vs K2", canal: "Canal 5, Azteca 7", horario: "13:00 hrs" },
+            { fecha: "11 de Junio", partido: "México vs. Sudáfrica (Inauguración)", canal: "Canal 5, Las Estrellas, Azteca 7", horario: "13:00 hrs" },
+            { fecha: "12 de Junio", partido: "Estados Unidos vs. Paraguay (Fase de Grupos)", canal: "Canal 5, Azteca 7", horario: "13:00 hrs" },
+            { fecha: "14 de Junio", partido: "Países Bajos vs. Japón (Fase de Grupos)", canal: "Canal 5, Azteca 7", horario: "10:00 hrs" },
+            { fecha: "18 de Junio", partido: "México vs. Corea del Sur (Fase de Grupos)", canal: "Canal 5, Las Estrellas, Azteca 7", horario: "20:00 hrs" },
+            { fecha: "20 de Junio", partido: "Países Bajos vs. Suecia (Fase de Grupos)", canal: "Canal 5, Azteca 7", horario: "16:00 hrs" },
+            { fecha: "24 de Junio", partido: "Chequia vs. México (Fase de Grupos)", canal: "Canal 5, Las Estrellas, Azteca 7", horario: "16:00 hrs" },
+            { fecha: "26 de Junio", partido: "Uruguay vs. España (Fase de Grupos)", canal: "Canal 5, Azteca 7", horario: "13:00 hrs" },
             { fecha: "28 de Junio", partido: "Dieciseisavos de Final (S1)", canal: "Canal 5, Azteca 7", horario: "10:00 hrs" },
             { fecha: "30 de Junio", partido: "Dieciseisavos de Final (Posible México si avanza)", canal: "Canal 5, Azteca 7", horario: "20:00 hrs" },
             { fecha: "04 de Julio", partido: "Octavos de Final (O1)", canal: "Canal 5, Azteca 7", horario: "13:00 hrs" },
@@ -322,11 +309,12 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            const ctx = document.getElementById('distributionChart').getContext('2d');
-            new Chart(ctx, chartConfig);
-
+            // 1. RENDERIZAMOS LA TABLA PRIMERO
+            // Esto asegura que la tabla de partidos se muestre independientemente 
+            // de si la gráfica falla al descargar o inicializar.
             renderTable(scheduleData);
 
+            // 2. CONFIGURAMOS EL BUSCADOR
             const searchInput = document.getElementById('searchInput');
             searchInput.addEventListener('input', (e) => {
                 const searchTerm = e.target.value.toLowerCase();
@@ -337,6 +325,14 @@
                 );
                 renderTable(filteredData);
             });
+
+            // 3. INTENTAMOS RENDERIZAR LA GRÁFICA (PROTEGIDA CON TRY-CATCH)
+            try {
+                const ctx = document.getElementById('distributionChart').getContext('2d');
+                new Chart(ctx, chartConfig);
+            } catch (error) {
+                console.error('Error al cargar Chart.js. Verifica tu conexión a internet o bloqueador de anuncios:', error);
+            }
         });
     </script>
 </body>
